@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Obitron Lightbeam | Backup. Protected. Ready.</title>
+
+    <meta
+        name="description"
+        content="Obitron Lightbeam is a modern backup and recovery solution designed to keep your data protected, available and ready when you need it."
+    >
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 80% 10%, rgba(48, 255, 181, 0.09), transparent 30%),
+                radial-gradient(circle at 10% 50%, rgba(31, 107, 255, 0.10), transparent 35%),
+                #060a11;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1180px, 90%);
+            margin: auto;
+        }
+
+        /* Navigation */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(6, 10, 17, 0.86);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #38f5b0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            color: #bcc8d6;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            padding: 11px 19px;
+            background: #38f5b0;
+            color: #05120e !important;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 88vh;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 70px;
+            padding: 100px 0 80px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 12px;
+            border: 1px solid rgba(56, 245, 176, 0.35);
+            border-radius: 999px;
+            color: #72f7c6;
+            background: rgba(56, 245, 176, 0.06);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 6.5vw, 84px);
+            line-height: 0.98;
+            letter-spacing: -4px;
+            margin-bottom: 28px;
+            max-width: 800px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #ffffff, #38f5b0);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-copy {
+            max-width: 660px;
+            color: #aab6c5;
+            font-size: 20px;
+            margin-bottom: 36px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 23px;
+            border-radius: 9px;
+            font-weight: 750;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #38f5b0;
+            color: #05120e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(56, 245, 176, 0.18);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: white;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        /* Hero dashboard */
+
+        .dashboard {
+            padding: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.07),
+                rgba(255, 255, 255, 0.02)
+            );
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+        }
+
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .dashboard-title {
+            font-weight: 700;
+        }
+
+        .status {
+            color: #38f5b0;
+            font-size: 13px;
+        }
+
+        .status::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #38f5b0;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 7px;
+            box-shadow: 0 0 15px #38f5b0;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 13px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            color: #8695a8;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 750;
+        }
+
+        .bar {
+            height: 7px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 92%;
+            background: linear-gradient(90deg, #1f7cff, #38f5b0);
+            border-radius: inherit;
+        }
+
+        /* Sections */
+
+        section {
+            padding: 110px 0;
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin-bottom: 55px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(36px, 5vw, 54px);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .section-heading p {
+            color: #9daaba;
+            font-size: 18px;
+        }
+
+        /* Feature cards */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.035);
+            padding: 30px;
+            transition: 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 245, 176, 0.32);
+        }
+
+        .icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: rgba(56, 245, 176, 0.10);
+            color: #38f5b0;
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #98a6b6;
+            font-size: 15px;
+        }
+
+        /* How it works */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .step-number {
+            font-size: 13px;
+            color: #38f5b0;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 13px;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #97a4b4;
+        }
+
+        /* Security section */
+
+        .security {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .security-panel {
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            padding: 38px;
+            background:
+                radial-gradient(circle at top right, rgba(56, 245, 176, 0.12), transparent 45%),
+                rgba(255, 255, 255, 0.03);
+        }
+
+        .security-line {
+            display: flex;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .security-line:last-child {
+            border-bottom: 0;
+        }
+
+        .check {
+            color: #38f5b0;
+            font-weight: bold;
+        }
+
+        .security-copy h2 {
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .security-copy p {
+            color: #9ba8b8;
+            font-size: 18px;
+            margin-bottom: 28px;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            border-radius: 24px;
+            padding: 80px 30px;
+            border: 1px solid rgba(56, 245, 176, 0.18);
+            background:
+                radial-gradient(circle at center top, rgba(56, 245, 176, 0.12), transparent 55%),
+                rgba(255, 255, 255, 0.025);
+        }
+
+        .cta h2 {
+            font-size: clamp(38px, 5vw, 60px);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .cta p {
+            color: #9ba9ba;
+            max-width: 650px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 36px 0;
+            color: #738196;
+            font-size: 14px;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 900px) {
+            .hero,
+            .security {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .features,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links a:not(.nav-button) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 49px;
+            }
+
+            .hero-copy {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+        <div class="container nav-inner">
+
+            <a href="#" class="logo">
+                OBITRON<span>LIGHTBEAM</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how">How it works</a>
+                <a href="#security">Security</a>
+                <a href="#contact" class="nav-button">Get started</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Hero -->
+
+    <main>
+
+        <div class="container hero">
+
+            <div>
+
+                <div class="eyebrow">
+                    Backup & Recovery
+                </div>
+
+                <h1>
+                    Your data.
+                    <span class="gradient-text">Protected at light speed.</span>
+                </h1>
+
+                <p class="hero-copy">
+                    Obitron Lightbeam is a modern backup and recovery platform
+                    designed to keep critical data protected, resilient and ready
+                    when your business needs it.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        Explore Lightbeam
+                    </a>
+
+                    <a href="#features" class="btn btn-secondary">
+                        See how it works
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="dashboard">
+
+                <div class="dashboard-header">
+                    <div class="dashboard-title">Lightbeam Console</div>
+                    <div class="status">Protected</div>
+                </div>
+
+                <div class="metric">
+                    <div class="metric-label">Backup status</div>
+                    <div class="metric-value">All systems protected</div>
+
+                    <div class="bar">
+                        <div class="bar-fill"></div>
+                    </div>
+                </div>
+
+                <div class="metric">
+                    <div class="metric-label">Latest backup</div>
+                    <div class="metric-value">Completed</div>
+                </div>
+
+                <div class="metric">
+                    <div class="metric-label">Recovery readiness</div>
+                    <div class="metric-value">Ready</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Features -->
+
+        <section id="features">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">Designed for resilience</div>
+
+                    <h2>
+                        Backup without the complexity.
+                    </h2>
+
+                    <p>
+                        Lightbeam gives organisations a simpler way to protect
+                        important data and prepare for recovery when disruption happens.
+                    </p>
+                </div>
+
+                <div class="features">
+
+                    <div class="card">
+                        <div class="icon">↻</div>
+
+                        <h3>Automated backup</h3>
+
+                        <p>
+                            Reduce manual effort with scheduled protection designed
+                            to keep your data backed up consistently.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">⚡</div>
+
+                        <h3>Rapid recovery</h3>
+
+                        <p>
+                            Get the information you need back when it matters,
+                            helping minimise disruption to your organisation.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">◈</div>
+
+                        <h3>Central visibility</h3>
+
+                        <p>
+                            See backup health and protection status from a clear,
+                            streamlined management experience.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">◎</div>
+
+                        <h3>Built for continuity</h3>
+
+                        <p>
+                            Support your business continuity strategy with reliable,
+                            repeatable backup and recovery workflows.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">✓</div>
+
+                        <h3>Simple management</h3>
+
+                        <p>
+                            Make protection easier to understand, operate and manage
+                            across your organisation.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <div class="icon">⌁</div>
+
+                        <h3>Flexible protection</h3>
+
+                        <p>
+                            A modern foundation designed to support evolving data
+                            protection requirements.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- How it works -->
+
+        <section id="how">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <div class="eyebrow">How Lightbeam works</div>
+
+                    <h2>
+                        Protect. Monitor. Recover.
+                    </h2>
+                </div>
+
+                <div class="steps">
+
+                    <div class="step">
+                        <div class="step-number">01 / PROTECT</div>
+
+                        <h3>Secure your data</h3>
+
+                        <p>
+                            Configure the information and systems you want Lightbeam
+                            to protect.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">02 / MONITOR</div>
+
+                        <h3>Stay informed</h3>
+
+                        <p>
+                            Monitor backup activity and understand your current
+                            protection status.
+                        </p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">03 / RECOVER</div>
+
+                        <h3>Restore with confidence</h3>
+
+                        <p>
+                            When recovery is needed, retrieve protected data through
+                            a controlled recovery process.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Security -->
+
+        <section id="security">
+
+            <div class="container security">
+
+                <div class="security-copy">
+
+                    <div class="eyebrow">Data resilience</div>
+
+                    <h2>
+                        Because a backup only matters when you can recover it.
+                    </h2>
+
+                    <p>
+                        Lightbeam is built around a simple principle: protecting data
+                        is only part of the job. Recovery readiness matters too.
+                    </p>
+
+                    <a href="#contact" class="btn btn-primary">
+                        Talk to us
+                    </a>
+
+                </div>
+
+                <div class="security-panel">
+
+                    <div class="security-line">
+                        <span class="check">✓</span>
+                        <span>Backup monitoring and visibility</span>
+                    </div>
+
+                    <div class="security-line">
+                        <span class="check">✓</span>
+                        <span>Structured recovery workflows</span>
+                    </div>
+
+                    <div class="security-line">
+                        <span class="check">✓</span>
+                        <span>Designed with resilience in mind</span>
+                    </div>
+
+                    <div class="security-line">
+                        <span class="check">✓</span>
+                        <span>Centralised backup management</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section id="contact">
+
+            <div class="container">
+
+                <div class="cta">
+
+                    <div class="eyebrow">
+                        Obitron Lightbeam
+                    </div>
+
+                    <h2>
+                        Ready when your data isn't.
+                    </h2>
+
+                    <p>
+                        Discover a simpler approach to backup, recovery and
+                        data resilience with Obitron Lightbeam.
+                    </p>
+
+                    <a
+                        href="mailto:hello@example.com"
+                        class="btn btn-primary"
+                    >
+                        Contact us
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="container footer-inner">
+
+            <div>
+                © 2026 Obitron Lightbeam. All rights reserved.
+            </div>
+
+            <div>
+                Backup. Recover. Keep moving.
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
