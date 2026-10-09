@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | Obitron Lightbeam</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Obitron Lightbeam home">
+        <span class="brand-obitron">OBITRON</span><span class="brand-light">LIGHTBEAM</span>
+      </a>
+      <nav>
+        <a href="index.html#platform">Platform</a>
+        <a href="index.html#sources">Sources</a>
+        <a href="index.html#targets">Targets</a>
+        <a href="index.html#capabilities">Capabilities</a>
+        <a class="button ghost small" href="blog.html">Blog</a>
+        <a class="button small" href="index.html#contact">Talk to us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="post-page">
+    <div class="post-wrap">
+      <a class="back-link" href="blog.html">← All posts</a>
+      <article id="post" aria-live="polite">
+        <p class="status-box">Loading post…</p>
+      </article>
+
+      <section class="comments" id="comments" hidden>
+        <h2>Comments</h2>
+        <p class="hint">Sign in with GitHub inside the box below to comment and react.</p>
+        <div id="giscus"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap footer">
+      <div class="brand"><span class="brand-obitron">OBITRON</span><span class="brand-light">LIGHTBEAM</span></div>
+      <p>© 2026 Obitron Lightbeam. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="blog.js"></script>
+  <script>LightbeamBlog.renderPost();</script>
+</body>
+</html>
