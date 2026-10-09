@@ -8,11 +8,16 @@
   var CONFIG = {
     owner: 'eilahestellasaul-art',
     repo: 'obitronlightbeam',
-    category: 'blog' // slug of the Discussions category used for posts
+    category: 'general' // fallback; posts.json says which Discussions category is in use
   };
 
   var repoUrl = 'https://github.com/' + CONFIG.owner + '/' + CONFIG.repo;
   var newPostUrl = repoUrl + '/discussions/new?category=' + CONFIG.category;
+  function useCategory(data) {
+    if (data && data.categorySlug) CONFIG.category = data.categorySlug;
+    newPostUrl = repoUrl + '/discussions/new?category=' + CONFIG.category;
+    document.querySelectorAll('[data-new-post]').forEach(function (a) { a.href = newPostUrl; });
+  }
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -51,6 +56,7 @@
     if (write) write.href = newPostUrl;
 
     loadPosts().then(function (data) {
+      useCategory(data);
       var posts = (data && data.posts) || [];
       if (!posts.length) {
         el.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><h3>No posts yet</h3>' +
@@ -92,7 +98,7 @@
       'data-loading': 'lazy'
     };
     if (data.categoryId) {
-      attrs['data-category'] = data.categoryName || 'Blog';
+      attrs['data-category'] = data.categoryName || 'General';
       attrs['data-category-id'] = data.categoryId;
     }
     Object.keys(attrs).forEach(function (k) { s.setAttribute(k, attrs[k]); });
@@ -106,6 +112,7 @@
     if (!n) { location.replace('blog.html'); return; }
 
     loadPosts().then(function (data) {
+      useCategory(data);
       var p = ((data && data.posts) || []).filter(function (x) { return x.number === n; })[0];
       if (!p) {
         el.innerHTML = '<div class="status-box"><h3>This post isn’t here yet</h3>' +

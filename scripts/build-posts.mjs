@@ -4,7 +4,9 @@ import { writeFile } from 'node:fs/promises';
 
 const token = process.env.GITHUB_TOKEN;
 const [owner, name] = (process.env.GITHUB_REPOSITORY || '').split('/');
-const categorySlug = process.env.BLOG_CATEGORY || 'blog';
+// First category slug that exists wins, e.g. "blog,general"
+const categorySlugs = (process.env.BLOG_CATEGORY || 'blog,general').split(',').map(s => s.trim()).filter(Boolean);
+let categorySlug = categorySlugs[0];
 const out = process.env.OUT_FILE || 'posts.json';
 
 if (!token || !owner || !name) {
@@ -46,7 +48,7 @@ function excerpt(text, max = 180) {
   return t.length > max ? t.slice(0, max).replace(/\s+\S*$/, '') + '…' : t;
 }
 
-const result = { repo: `${owner}/${name}`, repoId: null, categoryId: null, categoryName: null, generatedAt: new Date().toISOString(), posts: [] };
+const result = { repo: `${owner}/${name}`, repoId: null, categoryId: null, categoryName: null, categorySlug: null, posts: [] };
 
 let repo = await gql({ owner, name, cursor: null });
 result.repoId = repo.id;
@@ -54,12 +56,14 @@ result.repoId = repo.id;
 if (!repo.hasDiscussionsEnabled) {
   console.warn('Discussions are not enabled on this repo yet — publishing an empty blog.');
 } else {
-  const cat = repo.discussionCategories.nodes.find(c => c.slug === categorySlug);
+  const cat = categorySlugs.map(sl => repo.discussionCategories.nodes.find(c => c.slug === sl)).find(Boolean);
   if (!cat) {
-    console.warn(`No Discussions category with slug "${categorySlug}" — publishing an empty blog.`);
+    console.warn(`No Discussions category matching "${categorySlugs.join(', ')}" — publishing an empty blog.`);
   } else {
     result.categoryId = cat.id;
     result.categoryName = cat.name;
+    result.categorySlug = categorySlug = cat.slug;
+    console.log(`Using Discussions category "${cat.name}"`);
     for (;;) {
       for (const d of repo.discussions.nodes) {
         if (d.category?.slug !== categorySlug) continue;

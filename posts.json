@@ -3,6 +3,6 @@
   "repoId": null,
   "categoryId": null,
   "categoryName": null,
-  "generatedAt": null,
+  "categorySlug": null,
   "posts": []
 }
