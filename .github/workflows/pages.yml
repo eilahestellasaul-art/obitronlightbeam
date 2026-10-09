@@ -1,0 +1,62 @@
+name: Update blog posts
+
+# Rebuilds posts.json from GitHub Discussions and commits it.
+# The normal GitHub Pages branch deploy then publishes the change.
+on:
+  push:
+    branches: [main]
+    paths-ignore: [posts.json]
+  discussion:
+    types: [created, edited, deleted, category_changed, transferred]
+  discussion_comment:
+    types: [created, deleted]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  discussions: read
+  pages: write
+
+concurrency:
+  group: blog-posts
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build posts.json from Discussions
+        run: node scripts/build-posts.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BLOG_CATEGORY: blog,general
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet -- posts.json; then
+            echo "No changes to posts.json"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add posts.json
+          git commit -m "Update blog posts"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Ask Pages to rebuild
+        if: steps.commit.outputs.changed == 'true'
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || echo "Pages will rebuild from the push"
+        env:
+          GH_TOKEN: ${{ github.token }}

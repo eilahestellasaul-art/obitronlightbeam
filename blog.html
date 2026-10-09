@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog | Obitron Lightbeam</title>
+  <meta name="description" content="News, guides and discussion from the Obitron Lightbeam community.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="Obitron Lightbeam home">
+        <span class="brand-obitron">OBITRON</span><span class="brand-light">LIGHTBEAM</span>
+      </a>
+      <nav>
+        <a href="index.html#platform">Platform</a>
+        <a href="index.html#sources">Sources</a>
+        <a href="index.html#targets">Targets</a>
+        <a href="index.html#capabilities">Capabilities</a>
+        <a class="button ghost small" href="blog.html" aria-current="page">Blog</a>
+        <a class="button small" href="index.html#contact">Talk to us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero blog-hero">
+      <div class="hero-glow"></div>
+      <div class="wrap hero-copy">
+        <p class="eyebrow">Community • News • Guides</p>
+        <h1>The Lightbeam <span>blog.</span></h1>
+        <p class="lead">Ideas, updates and how-tos from the people moving and protecting data with Lightbeam. Read freely, then sign in to post and join the conversation.</p>
+        <div class="actions">
+          <a class="button" id="write-post" data-new-post href="https://github.com/eilahestellasaul-art/obitronlightbeam/discussions/new?category=general" target="_blank" rel="noopener">Write a post</a>
+          <a class="button ghost" href="https://github.com/login" target="_blank" rel="noopener">Sign in with GitHub</a>
+        </div>
+        <p class="account-note">Your GitHub account is your Lightbeam account — no separate password. New here? <a href="https://github.com/signup" target="_blank" rel="noopener">Register for a free GitHub account</a>, then come back to post and comment.</p>
+      </div>
+    </section>
+
+    <section class="blog-section">
+      <div class="wrap">
+        <div id="posts" class="post-grid" aria-live="polite">
+          <p class="status-box" style="grid-column:1/-1">Loading posts…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer">
+      <div class="brand"><span class="brand-obitron">OBITRON</span><span class="brand-light">LIGHTBEAM</span></div>
+      <p>© 2026 Obitron Lightbeam. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="blog.js"></script>
+  <script>LightbeamBlog.renderList();</script>
+</body>
+</html>

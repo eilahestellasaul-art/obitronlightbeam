@@ -1,0 +1,54 @@
+/* Blog pages — extends styles.css using the same palette and components */
+
+.blog-hero{padding:84px 0 40px}
+.blog-hero .lead{margin-bottom:24px}
+
+.account-note{max-width:640px;margin:22px auto 0;font-size:14px;color:#8fb2c8}
+.account-note a{color:#54d9ff;text-decoration:underline;text-underline-offset:3px}
+
+.blog-section{padding:40px 0 100px}
+.post-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.post-card{display:flex;flex-direction:column;gap:14px;padding:26px;border-radius:16px;border:1px solid rgba(68,198,255,.17);background:linear-gradient(145deg,rgba(9,40,68,.85),rgba(4,20,36,.86));min-height:220px;transition:border-color .2s,transform .2s}
+.post-card:hover,.post-card:focus-visible{border-color:rgba(43,218,255,.55);transform:translateY(-2px);outline:none}
+.post-card h3{margin:0;color:#eafdff;font-size:21px;line-height:1.25}
+.post-card p{margin:0;color:#8fb2c8;flex:1}
+.post-meta{display:flex;align-items:center;gap:10px;font-size:13px;color:#7fa3ba;flex-wrap:wrap}
+.post-meta img{width:26px;height:26px;border-radius:50%;border:1px solid rgba(99,211,255,.35)}
+.post-meta .dot{opacity:.5}
+.comment-count{color:#54d8ff}
+
+.empty-state,.status-box{text-align:center;padding:56px 30px;border:1px dashed rgba(68,198,255,.3);border-radius:18px;background:rgba(5,24,41,.6);color:#a9c3d4}
+.empty-state h3,.status-box h3{margin:0 0 8px;color:#eafdff;font-size:22px}
+.empty-state p,.status-box p{margin:0 auto 22px;max-width:520px}
+
+/* Single post */
+.post-page{padding:64px 0 100px}
+.post-wrap{width:min(820px,92%);margin:auto}
+.back-link{display:inline-block;margin-bottom:26px;color:#54d9ff;font-size:14px}
+.post-page h1{margin:.2em 0 .4em;font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-.035em}
+.post-page .post-meta{margin-bottom:34px;font-size:14px}
+.post-page .post-meta img{width:32px;height:32px}
+
+.post-body{color:#c6dcea;font-size:18px;line-height:1.75}
+.post-body h1,.post-body h2,.post-body h3,.post-body h4{color:#eafdff;line-height:1.25;margin:1.6em 0 .5em;letter-spacing:-.02em}
+.post-body h1{font-size:32px}.post-body h2{font-size:27px}.post-body h3{font-size:22px}
+.post-body a{color:#54d9ff;text-decoration:underline;text-underline-offset:3px}
+.post-body img{max-width:100%;height:auto;border-radius:12px;border:1px solid rgba(99,211,255,.25)}
+.post-body pre{overflow-x:auto;padding:18px;border-radius:12px;background:#010711;border:1px solid rgba(68,198,255,.16);font-size:14px}
+.post-body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;background:rgba(17,141,220,.12);padding:.15em .4em;border-radius:6px}
+.post-body pre code{background:none;padding:0}
+.post-body blockquote{margin:1.4em 0;padding:4px 20px;border-left:3px solid #23bfff;color:#a9c3d4}
+.post-body table{border-collapse:collapse;width:100%;display:block;overflow-x:auto}
+.post-body th,.post-body td{border:1px solid rgba(68,198,255,.2);padding:8px 12px}
+.post-body hr{border:0;border-top:1px solid rgba(68,198,255,.2);margin:2em 0}
+/* GitHub-rendered markdown adds anchor icons we don't need */
+.post-body .anchor,.post-body .octicon{display:none}
+
+.post-actions{display:flex;gap:12px;flex-wrap:wrap;margin:42px 0 0;padding-top:30px;border-top:1px solid rgba(68,198,255,.16)}
+
+.comments{margin-top:56px}
+.comments h2{font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
+.comments .hint{color:#8fb2c8;font-size:14px;margin:0 0 22px}
+
+@media(max-width:900px){.post-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.post-grid{grid-template-columns:1fr}.blog-hero{padding-top:60px}.post-page{padding-top:44px}}
